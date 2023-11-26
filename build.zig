@@ -1,9 +1,12 @@
 const std = @import("std");
-const deps = @import("./deps.zig");
 
 pub fn build(b: *std.build.Builder) void {
     const target = b.standardTargetOptions(.{});
     const mode = b.option(std.builtin.Mode, "mode", "") orelse .Debug;
+
+    _ = b.addModule("flags", .{
+        .source_file = .{ .path = "src/lib.zig" },
+    });
 
     const exe = b.addExecutable(.{
         .name = "zig-flag",
@@ -11,7 +14,8 @@ pub fn build(b: *std.build.Builder) void {
         .target = target,
         .optimize = mode,
     });
-    deps.addAllTo(exe);
+    const extras = b.dependency("extras", .{});
+    exe.addModule("extras", extras.module("extras"));
     b.installArtifact(exe);
 
     const run_cmd = b.addRunArtifact(exe);

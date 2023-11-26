@@ -1,0 +1,15 @@
+.{
+    .name = "flag",
+    .version = "0.1.0",
+    .dependencies = .{
+        .extras = .{
+            .url = "git+https://github.com/nektro/zig-extras#1f7f862f7d7b4c7de5b61668a2b5c86db173275b",
+            .hash = "1220095f844b247c3a60cd3bc97234ef2557cfaf6a2596846c2c3f77ec1ca0fea12b",
+        },
+    },
+    .paths = .{
+        "src",
+        "build.zig",
+        "build.zig.zon",
+    },
+}
